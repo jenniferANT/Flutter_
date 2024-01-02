@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:keep_learning/widgets/day19ui.dart';
 import 'package:keep_learning/widgets/imagepicker.dart';
+import 'package:keep_learning/widgets/list_gid.dart';
+import 'package:keep_learning/widgets/location.dart';
 //import 'package:keep_learning/widgets/animated_text.dart';
 //import 'package:keep_learning/widgets/bottomnav.dart';
 //import 'package:keep_learning/widgets/dropdown.dart';
@@ -26,13 +29,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp (
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light, primaryColor: Colors.red),
-      home : const ImagePickerWidget(),
-      );
-     
+      theme: ThemeData(brightness: Brightness.light, primaryColor: Colors.red),
+      home: const Day19(),
+    );
   }
 }
-

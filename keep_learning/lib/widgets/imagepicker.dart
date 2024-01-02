@@ -11,13 +11,12 @@ class ImagePickerWidget extends StatefulWidget {
 }
 
 class _ImagePickerWidgetState extends State<ImagePickerWidget> {
-
   XFile? file;
   ImagePicker _picker = ImagePicker();
+  List<XFile>? files;
 
   @override
   Widget build(BuildContext context) {
-
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -31,23 +30,38 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               height: 300,
               width: double.infinity,
               color: Colors.amber,
-              child: Center(child: file == null 
-                ? Text('Image not picker') 
-                : Image.file(
-                    File(file!.path),
-                    fit: BoxFit.cover,
-                )
-              ),
+              child: Center(
+                  child: file == null
+                      ? Text('Image not picker')
+                      : Image.file(
+                          File(file!.path),
+                          fit: BoxFit.cover,
+                        )),
             ),
             ElevatedButton(
-              onPressed: () async{
-                final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
+              onPressed: () async {
+                final XFile? photo =
+                    await _picker.pickImage(source: ImageSource.gallery);
 
                 setState(() {
                   file = photo;
                 });
                 print(file!.path);
-              }, 
+              },
+              child: Text('Pick Image'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final List<XFile>? photo = await _picker.pickMultiImage();
+                //final XFile? photo = await _picker.pickImage(source: ImageSource.gallery);
+
+                setState(() {
+                  files = photo;
+                });
+                for (int i = 0; i < files!.length; i++) {
+                  print(files![i].path);
+                }
+              },
               child: Text('Pick Image'),
             )
           ],
